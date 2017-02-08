@@ -15,6 +15,7 @@ To allocate a block of memory, the algorithm is as follows:
         
         
  Freeing Memory and Coalescing -
+ 
         In a simple world, free()ing a block of memory would involve just inserting the block back into the free list; however, over time this can create external fragmentation, where the list is divided into many small blocks which are incapable of satisfying larger requests. To combat this, many allocators use what is called coalescing, where a block to be freed is merged with free memory immediately adjacent to the block. This way, larger blocks can be created to satisfy a broader range of requests in the future efficiently.
 The header plays an integral part to this process. The basic layout of all blocks in memory should look something like this:
 *Remember: when splitting blocks of memory, you will retrieve the bottom chunk, which will result in a numbering like above in cases of multiple mallocs in a row, with the first header the furthest left, then the rest in ascending order up to two. *
