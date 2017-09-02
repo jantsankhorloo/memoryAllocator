@@ -18,9 +18,9 @@ To allocate a block of memory, the algorithm is as follows:
   1.  Round up the requested size to the next 8 byte boundary.
   2.  Add the size of the block’s header (i.e. real_size = roundup8(requested size) + sizeof(header)).
   3.  Traverse the free list from the beginning, and find the first block large enough to satisfy the request.
-    -        If the block is large enough to be split (that is, the remainder is at least 8 bytes plus the size of the header), split the block in two. The second block (highest memory) should be removed from the free list and returned to satisfy the request (see the diagram below). Set the _allocated flag to true in the header. Update the proceeding block’s leftObjectSize to the size of the allocated block.
-    -        If the block is not large enough to be split, simply remove that block from the list and return it.
-    -        If the list is empty, request a new 2MB block, insert the block into the free list, and repeat step 3.
+    3a.If the block is large enough to be split (that is, the remainder is at least 8 bytes plus the size of the header), split the block in two. The second block (highest memory) should be removed from the free list and returned to satisfy the request (see the diagram below). Set the _allocated flag to true in the header. Update the proceeding block’s leftObjectSize to the size of the allocated block.
+    3b. If the block is not large enough to be split, simply remove that block from the list and return it.
+    3c. If the list is empty, request a new 2MB block, insert the block into the free list, and repeat step 3.
         
 ### The algorithm for freeing memory and coalescing
  
